@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_apple_store", "MVC_apple_store\MVC_apple_store.csproj", "{02C772F5-C91F-44C8-97A3-0BF84DDDCC20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{43BC64D0-366E-42FD-B1DA-FE9203DEAE03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02C772F5-C91F-44C8-97A3-0BF84DDDCC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02C772F5-C91F-44C8-97A3-0BF84DDDCC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02C772F5-C91F-44C8-97A3-0BF84DDDCC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43BC64D0-366E-42FD-B1DA-FE9203DEAE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43BC64D0-366E-42FD-B1DA-FE9203DEAE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43BC64D0-366E-42FD-B1DA-FE9203DEAE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43BC64D0-366E-42FD-B1DA-FE9203DEAE03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

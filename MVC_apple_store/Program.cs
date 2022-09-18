@@ -1,9 +1,15 @@
+using DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// TODO: Investigate about Dependency Injection
 // add our services...
+builder.Services.AddDbContext<StoreDbContext>(x =>
+        x.UseSqlServer(builder.Configuration.GetConnectionString("LocalStore")));
 
 var app = builder.Build();
 

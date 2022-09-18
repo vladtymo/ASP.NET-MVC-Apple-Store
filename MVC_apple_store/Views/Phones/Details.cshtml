@@ -1,18 +1,21 @@
-﻿@model MVC_apple_store.Models.Phone;
+﻿@model DataAccess.Entities.Phone;
 
 <secion class="text-center">
-    <h1>@Model.Model</h1>
+    <div class="text-center my-2">
+        <img width="300" src="@Model.ImagePath" class="rounded" alt="iPhone image">
+    </div>
+    <h1>@Model.Model</h1>   
     <h3>@Model.Description</h3>
     <p>From @Model.Price$ before trade-in*</p>
     <div>
         <button type="button" class="btn btn-primary my-3">Buy</button>
     </div>
-
     <div>
         <a href="#" class="link-secondary">Watch the film</a>
         <a href="#" class="link-secondary">Watch the event</a>
     </div>  
 </secion>
+
 
 <div class="mt-5 fs-6">
     <ul class="list-group list-group-flush">

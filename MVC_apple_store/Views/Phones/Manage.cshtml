@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DataAccess.Entities.Phone>;
+
+<h1 class="text-center">Phone List</h1>
+
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Model</th>
+            <th scope="col">Color</th>
+            <th scope="col">Memory</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var phone in Model)
+        {
+            <tr>
+                <th class="align-middle" scope="row">@phone.Id</th>
+                <td class="align-middle">
+                    <img src="@phone.ImagePath" width="50"/>
+                </td>
+                <td class="align-middle">@phone.Model</td>
+                <td class="align-middle">@phone.Color</td>
+                <td class="align-middle">@phone.Memory</td>
+                <td class="align-middle">@phone.Price</td>
+                <td class="align-middle">@phone.Description</td>
+                <td class="align-middle">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@phone.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary">Create New Phone</a>

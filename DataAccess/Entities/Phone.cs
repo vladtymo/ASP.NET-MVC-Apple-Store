@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MVC_apple_store.Models
+namespace DataAccess.Entities
 {
     public class Phone
     {
@@ -12,5 +12,6 @@ namespace MVC_apple_store.Models
         public decimal Price { get; set; }
         public int Memory { get; set; }
         public string? Description { get; set; }
+        public string ImagePath { get; set; }
     }
 }

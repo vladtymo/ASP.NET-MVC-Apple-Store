@@ -1,4 +1,7 @@
 ﻿@model DataAccess.Entities.Phone;
+@{
+    const string imagePlaceholderUrl = "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg";
+}
 
 <h1 class="text-center">Create New Phone</h1>
 <hr />
@@ -30,8 +33,11 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="col-12">
+        <div class="text-center my-2">
+            <img src="@imagePlaceholderUrl" alt="Product Image" class="rounded" width="100" id="image" />
+        </div>
         <label asp-for="ImagePath" class="form-label">Image URL</label>
-        <input type="url" asp-for="ImagePath" class="form-control">
+        <input type="url" asp-for="ImagePath" class="form-control" id="image-path-input">
         <span asp-validation-for="ImagePath" class="text-danger"></span>
     </div>
     <div class="col-6">
@@ -41,3 +47,20 @@
         <button type="submit" class="btn btn-primary w-100">Create</button>
     </div>
 </form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#image-path-input").change(function () {
+            const value = $(this).val();
+            setImage(value);
+        });
+
+        function setImage(imageUrl) {
+            if (imageUrl == '') {
+                imageUrl = '@imagePlaceholderUrl';
+            }
+            $("#image").attr('src', imageUrl);
+        }
+    </script>
+}

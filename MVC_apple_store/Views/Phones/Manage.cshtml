@@ -21,7 +21,7 @@
             <tr>
                 <th class="align-middle" scope="row">@phone.Id</th>
                 <td class="align-middle">
-                    <img src="@phone.ImagePath" width="50"/>
+                    <img src="@phone.ImagePath" width="50" alt="Product Image"/>
                 </td>
                 <td class="align-middle">@phone.Model</td>
                 <td class="align-middle">@phone.Color</td>
@@ -39,4 +39,4 @@
     </tbody>
 </table>
 
-<a class="btn btn-primary">Create New Phone</a>
+<a asp-action="Create" class="btn btn-primary">Create New Phone</a>

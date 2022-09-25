@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using MVC_apple_store.Models;
 
@@ -20,11 +21,28 @@ namespace MVC_apple_store.Controllers
             return View(phones);
         }
 
+        // GET: /Phones/Manage
         public IActionResult Manage()
         {
             var phones = context.Phones.ToList();
 
-            return View(phones);
+            return View(phones); // ~Views/Phones/Manage.cshtml
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Phone phone)
+        {
+            if (!ModelState.IsValid) return View();
+
+            context.Phones.Add(phone);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Manage));
         }
 
         public IActionResult Details(int id)
@@ -49,7 +67,7 @@ namespace MVC_apple_store.Controllers
             context.Phones.Remove(phone);
             context.SaveChanges();
 
-            return RedirectToAction(nameof(Manage)); //View("Index");
+            return RedirectToAction(nameof(Manage));
         }
     }
 }

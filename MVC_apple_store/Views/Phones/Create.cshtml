@@ -1,4 +1,4 @@
-﻿@model MVC_apple_store.ViewModels.CreatePhoneViewModel;
+﻿@model DataAccess.Entities.Phone;
 @{
     const string imagePlaceholderUrl = "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg";
 }
@@ -8,37 +8,37 @@
 
 <form asp-action="Create" method="post" class="row g-3">
     <div class="col-6">
-        <label asp-for="Phone.Model" class="form-label">Model</label>
-        <input asp-for="Phone.Model" class="form-control">
-        <span asp-validation-for="Phone.Model" class="text-danger"></span>
+        <label asp-for="Model" class="form-label">Model</label>
+        <input asp-for="Model" class="form-control">
+        <span asp-validation-for="Model" class="text-danger"></span>
     </div>
     <div class="col-6">
-        <label asp-for="Phone.Price" class="form-label">Price</label>
-        <input asp-for="Phone.Price" class="form-control">
-        <span asp-validation-for="Phone.Price" class="text-danger"></span>
+        <label asp-for="Price" class="form-label">Price</label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="col-6">
-        <label asp-for="Phone.ColorId" class="form-label">Color</label>
-        <select asp-for="Phone.ColorId" asp-items="@Model.Colors" class="form-select"></select>
-        <span asp-validation-for="Phone.ColorId" class="text-danger"></span>
+        <label asp-for="ColorId" class="form-label">Color</label>
+        <select asp-for="ColorId" asp-items="@ViewBag.ColorList" class="form-select"></select>
+        <span asp-validation-for="ColorId" class="text-danger"></span>
     </div>
     <div class="col-6">
-        <label asp-for="Phone.Memory" class="form-label">Memory</label>
-        <input asp-for="Phone.Memory" class="form-control">
-        <span asp-validation-for="Phone.Memory" class="text-danger"></span>
+        <label asp-for="Memory" class="form-label">Memory</label>
+        <input asp-for="Memory" class="form-control">
+        <span asp-validation-for="Memory" class="text-danger"></span>
     </div>
     <div class="col-12">
-        <label asp-for="Phone.Description" class="form-label">Description</label>
-        <textarea class="form-control" asp-for="Phone.Description" rows="5"></textarea>
-        <span asp-validation-for="Phone.Description" class="text-danger"></span>
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="col-12">
         <div class="text-center my-2">
             <img src="@imagePlaceholderUrl" alt="Product Image" class="rounded" width="100" id="image" />
         </div>
-        <label asp-for="Phone.ImagePath" class="form-label">Image URL</label>
-        <input type="url" asp-for="Phone.ImagePath" class="form-control" id="image-path-input">
-        <span asp-validation-for="Phone.ImagePath" class="text-danger"></span>
+        <label asp-for="ImagePath" class="form-label">Image URL</label>
+        <input type="url" asp-for="ImagePath" class="form-control" id="image-path-input">
+        <span asp-validation-for="ImagePath" class="text-danger"></span>
     </div>
     <div class="col-6">
         <a asp-action="Manage" class="btn btn-secondary w-100">Back</a>

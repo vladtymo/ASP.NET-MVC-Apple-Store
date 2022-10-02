@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_apple_store.Models;
-using MVC_apple_store.ViewModels;
 
 namespace MVC_apple_store.Controllers
 {
@@ -34,21 +33,31 @@ namespace MVC_apple_store.Controllers
 
         public IActionResult Create()
         {
-            CreatePhoneViewModel viewModel = new CreatePhoneViewModel()
-            {
-                Colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name))
-            };
+            var colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name));
 
-            return View(viewModel);
+            // Type Conversion code is required while enumerating.
+            // ViewData["ColorList"] = colors;
+
+            // In depth, ViewBag is used dynamic, so there is no need to type conversion while enumerating.
+            ViewBag.ColorList = colors;
+
+            return View();
         }
 
         [HttpPost]
         public IActionResult Create(Phone phone)
         {
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid)
+            {
+                var colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name));
+                ViewBag.ColorList = colors;
+                return View(phone);
+            }
 
             context.Phones.Add(phone);
             context.SaveChanges();
+
+            TempData["ToastrMessage"] = "Phone was created sucessfully!";
 
             return RedirectToAction(nameof(Manage));
         }

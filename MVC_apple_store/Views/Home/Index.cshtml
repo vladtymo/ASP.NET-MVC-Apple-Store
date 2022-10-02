@@ -1,4 +1,11 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿@model IEnumerable<DataAccess.Entities.Phone>;
+
+<h1 class="display-4 text-center">Popular Products</h1>
+<hr />
+
+<div class="row row-cols-4 g-3">
+    @foreach (var i in Model)
+    {
+        <partial name="_ProductCardPartial" model="@i" />
+    }
 </div>

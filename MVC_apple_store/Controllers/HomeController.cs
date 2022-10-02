@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC_apple_store.Models;
 using System.Diagnostics;
 
@@ -6,9 +8,17 @@ namespace MVC_apple_store.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly StoreDbContext context;
+
+        public HomeController(StoreDbContext context)
+        {
+            this.context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var phones = context.Phones.Include(p => p.Color).ToList();
+            return View(phones);
         }
 
         public IActionResult Privacy()

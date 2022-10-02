@@ -1,7 +1,10 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MVC_apple_store.Models;
+using MVC_apple_store.ViewModels;
 
 namespace MVC_apple_store.Controllers
 {
@@ -16,7 +19,7 @@ namespace MVC_apple_store.Controllers
 
         public IActionResult Index()
         {
-            var phones = context.Phones.ToList(); //MockData.GetPhones();
+            var phones = context.Phones.Include(p => p.Color).ToList(); //MockData.GetPhones();
 
             return View(phones);
         }
@@ -24,14 +27,19 @@ namespace MVC_apple_store.Controllers
         // GET: /Phones/Manage
         public IActionResult Manage()
         {
-            var phones = context.Phones.ToList();
+            var phones = context.Phones.Include(p => p.Color).ToList();
 
             return View(phones); // ~Views/Phones/Manage.cshtml
         }
 
         public IActionResult Create()
         {
-            return View();
+            CreatePhoneViewModel viewModel = new CreatePhoneViewModel()
+            {
+                Colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name))
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]

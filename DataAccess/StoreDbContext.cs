@@ -16,11 +16,17 @@ namespace DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.SeedColors();
             modelBuilder.SeedPhones();
+
+            modelBuilder.Entity<Phone>().HasOne(p => p.Color)
+                                        .WithMany(c => c.Phones)
+                                        .HasForeignKey(p => p.ColorId);
         }
 
         public virtual DbSet<Phone> Phones { get; set; }
-        
+        public virtual DbSet<Color> Colors { get; set; }
+
         //...
     }
 }

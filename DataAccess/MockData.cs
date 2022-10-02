@@ -13,7 +13,7 @@ namespace DataAccess
                 {
                     Id = 1,
                     Model = "iPhone 14",
-                    Color = "Midnight",
+                    ColorId = (int)Colors.Midnight,
                     Memory = 128,
                     Price = 799,
                     Description = "A total powerhouse.",
@@ -23,7 +23,7 @@ namespace DataAccess
                 {
                     Id = 2,
                     Model = "iPhone 14 Plus",
-                    Color = "Starlight",
+                    ColorId = (int)Colors.Starlight,
                     Memory = 128,
                     Price = 899,
                     Description = "Big and bigger.",
@@ -33,7 +33,7 @@ namespace DataAccess
                 {
                     Id = 3,
                     Model = "iPhone 14 Pro",
-                    Color = "Space Black",
+                    ColorId = (int)Colors.SpaceBlack,
                     Memory = 256,
                     Price = 1099,
                     Description = "The ultimate iPhone.",
@@ -43,12 +43,28 @@ namespace DataAccess
                 {
                     Id = 4,
                     Model = "iPhone 14 Pro Max",
-                    Color = "Deep Purple",
+                    ColorId = (int)Colors.DeepPurple,
                     Memory = 512,
                     Price = 1399,
                     Description = "Pro. Beyond.",
                     ImagePath = @"https://estore.ua/ua/media/catalog/product/cache/9/image/600x600/9df78eab33525d08d6e5fb8d27136e95/1/4/14pro-promax-purple-1_9.jpeg"
                 }
+            });
+        }
+        public static void SeedColors(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Color>().HasData(new Color[]
+            {
+                new Color() { Id = (int)Colors.Silver, Name = "Silver" },
+                new Color() { Id = (int)Colors.Black, Name = "Black" },
+                new Color() { Id = (int)Colors.SpaceBlack, Name = "Space Black" },
+                new Color() { Id = (int)Colors.SpaceGrey, Name = "Space Grey" },
+                new Color() { Id = (int)Colors.DeepPurple, Name = "Deep Purple" },
+                new Color() { Id = (int)Colors.Starlight, Name = "Starlight" },
+                new Color() { Id = (int)Colors.Green, Name = "Green" },
+                new Color() { Id = (int)Colors.Gold, Name = "Gold" },
+                new Color() { Id = (int)Colors.SierraBlue, Name = "Sierra Blue" },
+                new Color() { Id = (int)Colors.Midnight, Name = "Midnight" },
             });
         }
     }

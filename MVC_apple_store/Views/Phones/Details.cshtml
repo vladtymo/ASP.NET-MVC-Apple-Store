@@ -8,8 +8,15 @@
     <h3>@Model.Description</h3>
     <p>From @Model.Price$ before trade-in*</p>
     <div>
-        <button type="button" class="btn btn-primary my-3">Buy</button>
-    </div>
+        @if (ViewBag.IsInCart)
+        {
+            <a asp-controller="Cart" asp-action="Remove" asp-route-productId="@Model.Id" class="btn btn-secondary my-3">Remove from Cart</a>
+        }
+        else
+        {
+            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-primary my-3">Buy</a>
+        }
+        </div>
     <div>
         <a href="#" class="link-secondary">Watch the film</a>
         <a href="#" class="link-secondary">Watch the event</a>

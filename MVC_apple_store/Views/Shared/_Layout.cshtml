@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using MVC_apple_store.Helpers
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,6 +37,12 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" asp-controller="Phones" asp-action="Manage">iPhone</a></li>
                             </ul>
+                        </li>
+                        @{
+                            int cartCount = Context.Session.GetObject<List<int>>(WebConstants.cartListKey)?.Count ?? 0;
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">Cart (@cartCount)</a>
                         </li>
                     </ul>
                 </div>

@@ -1,6 +1,7 @@
-﻿@model IEnumerable<DataAccess.Entities.Phone>;
+﻿@using MVC_apple_store.Helpers
+@model IEnumerable<DataAccess.Entities.Phone>;
 @{
-    string? toastrMsg = TempData["ToastrMessage"] as string;
+    string? toastrMsg = TempData[WebConstants.alertMsgKey] as string;
 }
 
 <h1 class="text-center">Phone List</h1>

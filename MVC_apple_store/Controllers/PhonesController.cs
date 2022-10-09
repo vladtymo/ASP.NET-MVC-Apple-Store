@@ -3,6 +3,7 @@ using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MVC_apple_store.Helpers;
 using MVC_apple_store.Models;
 
 namespace MVC_apple_store.Controllers
@@ -42,8 +43,17 @@ namespace MVC_apple_store.Controllers
             if (phone == null) return NotFound();
 
             ViewBag.ReturnUrl = Request.Headers["Referer"].ToString();
+            ViewBag.IsInCart = IsInCart(id);
 
             return View(phone);
+        }
+        private bool IsInCart(int id)
+        {
+            var productIds = HttpContext.Session.GetObject<List<int>>(WebConstants.cartListKey);
+
+            if (productIds == null) return false;
+
+            return productIds.Contains(id);
         }
 
         // GET: /Phones/Create
@@ -74,7 +84,7 @@ namespace MVC_apple_store.Controllers
             context.Phones.Add(phone);
             context.SaveChanges();
 
-            TempData["ToastrMessage"] = "Phone was created successfully!";
+            TempData[WebConstants.alertMsgKey] = "Phone was created successfully!";
 
             return RedirectToAction(nameof(Manage));
         }
@@ -108,7 +118,7 @@ namespace MVC_apple_store.Controllers
             context.Phones.Update(phone);
             context.SaveChanges();
 
-            TempData["ToastrMessage"] = "Phone was edited successfully!";
+            TempData[WebConstants.alertMsgKey] = "Phone was edited successfully!";
 
             return RedirectToAction(nameof(Manage));
         }
@@ -125,7 +135,7 @@ namespace MVC_apple_store.Controllers
             context.Phones.Remove(phone);
             context.SaveChanges();
 
-            TempData["ToastrMessage"] = "Phone was deleted successfully!";
+            TempData[WebConstants.alertMsgKey] = "Phone was deleted successfully!";
 
             return RedirectToAction(nameof(Manage));
         }

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DataAccess.Entities.Phone>;
+
+<div class="card text-center">
+    <div class="card-header">
+        My Cart
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Product List</h5>
+        
+        <ul class="list-group my-3">
+            @foreach (var phone in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>@phone.Model</strong>
+                        <span>@phone.Memory GB</span>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">@phone.Price$</span>
+                </li>
+            }
+        </ul>
+        @*<div class="list-group my-3">
+            @foreach (var phone in Model)
+            {
+                <a asp-action="Details" asp-route-id="@phone.Id" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@phone.Model</h5>
+                        <small>@phone.Price$</small>
+                    </div>
+                    <p class="mb-1">@phone.Memory GB</p>
+                </a>
+            }
+        </div>*@
+
+        <a href="#" class="btn btn-primary">Confirm</a>
+    </div>
+    <div class="card-footer text-muted">
+        Total items: @Model.Count()
+    </div>
+</div>

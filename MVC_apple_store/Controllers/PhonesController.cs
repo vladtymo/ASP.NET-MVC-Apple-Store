@@ -16,6 +16,7 @@ namespace MVC_apple_store.Controllers
             this.context = context;
         }
 
+        // GET: /Phones/Index or /Phones
         public IActionResult Index()
         {
             var phones = context.Phones.Include(p => p.Color).ToList(); //MockData.GetPhones();
@@ -31,19 +32,35 @@ namespace MVC_apple_store.Controllers
             return View(phones); // ~Views/Phones/Manage.cshtml
         }
 
+        // GET: /Phones/Details/{id}
+        public IActionResult Details(int id)
+        {
+            if (id < 0) return BadRequest();
+
+            var phone = context.Phones.Find(id); //MockData.GetPhones().FirstOrDefault(p => p.Id == id);
+
+            if (phone == null) return NotFound();
+
+            ViewBag.ReturnUrl = Request.Headers["Referer"].ToString();
+
+            return View(phone);
+        }
+
+        // GET: /Phones/Create
         public IActionResult Create()
         {
             var colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name));
 
-            // Type Conversion code is required while enumerating.
+            // ViewData - type Conversion code is required while enumerating
             // ViewData["ColorList"] = colors;
 
-            // In depth, ViewBag is used dynamic, so there is no need to type conversion while enumerating.
+            // ViewBag - used dynamic, so there is no need to type conversion while enumerating
             ViewBag.ColorList = colors;
 
             return View();
         }
 
+        // POST: /Phones/Create
         [HttpPost]
         public IActionResult Create(Phone phone)
         {
@@ -57,22 +74,46 @@ namespace MVC_apple_store.Controllers
             context.Phones.Add(phone);
             context.SaveChanges();
 
-            TempData["ToastrMessage"] = "Phone was created sucessfully!";
+            TempData["ToastrMessage"] = "Phone was created successfully!";
 
             return RedirectToAction(nameof(Manage));
         }
 
-        public IActionResult Details(int id)
+        // GET: /Phones/Edit/{id}
+        public IActionResult Edit(int id)
         {
             if (id < 0) return BadRequest();
 
-            var phone = context.Phones.Find(id); //MockData.GetPhones().FirstOrDefault(p => p.Id == id);
+            var phone = context.Phones.Find(id);
 
             if (phone == null) return NotFound();
+
+            var colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name));
+            ViewBag.ColorList = colors;
 
             return View(phone);
         }
 
+        // POST: /Phones/Edit
+        [HttpPost]
+        public IActionResult Edit(Phone phone)
+        {
+            if (!ModelState.IsValid)
+            {
+                var colors = new SelectList(context.Colors, nameof(Color.Id), nameof(Color.Name));
+                ViewBag.ColorList = colors;
+                return View(phone);
+            }
+
+            context.Phones.Update(phone);
+            context.SaveChanges();
+
+            TempData["ToastrMessage"] = "Phone was edited successfully!";
+
+            return RedirectToAction(nameof(Manage));
+        }
+
+        // GET: /Phones/Delete/{id}
         public IActionResult Delete(int id)
         {
             if (id < 0) return BadRequest();
@@ -83,6 +124,8 @@ namespace MVC_apple_store.Controllers
 
             context.Phones.Remove(phone);
             context.SaveChanges();
+
+            TempData["ToastrMessage"] = "Phone was deleted successfully!";
 
             return RedirectToAction(nameof(Manage));
         }

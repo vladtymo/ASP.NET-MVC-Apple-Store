@@ -33,7 +33,7 @@
                 <td class="align-middle">@phone.Description</td>
                 <td class="align-middle">
                     <div class="btn-group" role="group">
-                        <a class="btn btn-warning">Edit</a>
+                        <a asp-action="Edit" asp-route-id="@phone.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="Delete" asp-route-id="@phone.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </td>

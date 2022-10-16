@@ -1,4 +1,6 @@
 ﻿using DataAccess.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext<IdentityUser>
     {
         public StoreDbContext(DbContextOptions options) : base(options) { }
 
@@ -16,17 +18,16 @@ namespace DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.SeedColors();
-            modelBuilder.SeedPhones();
-
             modelBuilder.Entity<Phone>().HasOne(p => p.Color)
                                         .WithMany(c => c.Phones)
                                         .HasForeignKey(p => p.ColorId);
+
+            modelBuilder.SeedColors();
+            modelBuilder.SeedPhones();
         }
 
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
-
-        //...
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

@@ -2,6 +2,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DataAccess.Entities;
+using MVC_apple_store.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,11 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// configure custom services
+builder.Services.AddScoped<ICartService, CartService>();
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

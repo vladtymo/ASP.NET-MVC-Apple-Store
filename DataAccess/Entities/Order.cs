@@ -12,7 +12,7 @@ namespace DataAccess.Entities
         public int Id { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public User? Client { get; set; }
         public ICollection<Phone>? Products { get; set; }
     }

@@ -1,5 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<DataAccess.Entities.Order>;
+
+<h1>My Orders</h1>
+
+<ul class="list-group my-3">
+    @foreach (var order in Model)
+    {
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <div>
+                <strong>@order.Id</strong>
+                <span>@order.Date</span>
+            </div>
+            <span class="badge bg-primary rounded-pill">@order.TotalPrice$</span>
+        </li>
+    }
+</ul>

@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_apple_store.Helpers;
 using MVC_apple_store.Models;
+using MVC_apple_store.Services;
 
 namespace MVC_apple_store.Controllers
 {
     public class PhonesController : Controller
     {
         private readonly StoreDbContext context;
+        private readonly ICartService cartService;
 
-        public PhonesController(StoreDbContext context)
+        public PhonesController(StoreDbContext context, ICartService cartService)
         {
             this.context = context;
+            this.cartService = cartService;
         }
 
         // GET: /Phones/Index or /Phones
@@ -43,19 +46,11 @@ namespace MVC_apple_store.Controllers
             if (phone == null) return NotFound();
 
             ViewBag.ReturnUrl = Request.Headers["Referer"].ToString();
-            ViewBag.IsInCart = IsInCart(id);
+            ViewBag.IsInCart = cartService.IsProductInCart(id);
 
             return View(phone);
         }
-        private bool IsInCart(int id)
-        {
-            var productIds = HttpContext.Session.GetObject<List<int>>(WebConstants.cartListKey);
-
-            if (productIds == null) return false;
-
-            return productIds.Contains(id);
-        }
-
+        
         // GET: /Phones/Create
         public IActionResult Create()
         {

@@ -3,20 +3,23 @@ using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using MVC_apple_store.Helpers;
+using MVC_apple_store.Services;
 
 namespace MVC_apple_store.Controllers
 {
     public class CartController : Controller
     {
+        private readonly ICartService cartService;
         private readonly StoreDbContext context;
 
-        public CartController(StoreDbContext context)
+        public CartController(ICartService cartService, StoreDbContext context)
         {
+            this.cartService = cartService;
             this.context = context;
         }
         public IActionResult Index()
         {
-            var products = GetProductsFromCart();
+            var products = cartService.GetProductsFromCart();
 
             return View(products);
         }
@@ -29,7 +32,7 @@ namespace MVC_apple_store.Controllers
 
             if (phone == null) return NotFound();
 
-            AddProductToCart(productId);
+            cartService.AddProductToCart(productId);
 
             return RedirectToAction("Details", "Phones", new { id = productId });
         }
@@ -41,41 +44,9 @@ namespace MVC_apple_store.Controllers
 
             if (phone == null) return NotFound();
 
-            RemoveProductFromCart(productId);
+            cartService.RemoveProductFromCart(productId);
 
             return RedirectToAction("Details", "Phones", new { id = productId });
-        }
-
-        private void AddProductToCart(int id)
-        {
-            var productIds = HttpContext.Session.GetObject<List<int>>(WebConstants.cartListKey);
-            
-            if (productIds == null)
-                productIds = new List<int>();
-
-            productIds.Add(id);
-
-            HttpContext.Session.SetObject(WebConstants.cartListKey, productIds);
-        }
-        private void RemoveProductFromCart(int id)
-        {
-            var productIds = HttpContext.Session.GetObject<List<int>>(WebConstants.cartListKey);
-
-            if (productIds == null) return;
-
-            productIds.Remove(id);
-
-            HttpContext.Session.SetObject(WebConstants.cartListKey, productIds);
-        }
-        private IEnumerable<Phone?> GetProductsFromCart()
-        {
-            var productIds = HttpContext.Session.GetObject<List<int>>(WebConstants.cartListKey);
-
-            if (productIds == null) return new List<Phone?>();
-
-            List<Phone?> phones = productIds.Select(id => context.Phones.Find(id)).ToList();
-
-            return phones;
         }
     }
 }

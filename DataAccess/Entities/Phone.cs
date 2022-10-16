@@ -23,5 +23,7 @@ namespace DataAccess.Entities
 
         [Url]
         public string ImagePath { get; set; }
+
+        public ICollection<Order>? Orders { get; set; }
     }
 }

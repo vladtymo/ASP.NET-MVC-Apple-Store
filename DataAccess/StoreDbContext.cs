@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class StoreDbContext : IdentityDbContext<IdentityUser>
+    public class StoreDbContext : IdentityDbContext<User>
     {
         public StoreDbContext(DbContextOptions options) : base(options) { }
 

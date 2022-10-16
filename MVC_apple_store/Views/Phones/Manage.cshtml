@@ -34,8 +34,12 @@
                 <td class="align-middle">@phone.Description</td>
                 <td class="align-middle">
                     <div class="btn-group" role="group">
-                        <a asp-action="Edit" asp-route-id="@phone.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@phone.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@phone.Id" class="btn btn-warning text-nowrap">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@phone.Id" class="btn btn-danger text-nowrap">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -43,7 +47,9 @@
     </tbody>
 </table>
 
-<a asp-action="Create" class="btn btn-primary">Create New Phone</a>
+<a asp-action="Create" class="btn btn-primary">
+    <i class="bi bi-plus"></i> Create New Phone
+</a>
 
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
     <div id="toastr-block" data-bs-autohide="true" data-bs-animation="true" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">

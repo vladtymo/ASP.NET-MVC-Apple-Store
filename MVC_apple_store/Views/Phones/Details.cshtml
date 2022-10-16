@@ -10,11 +10,15 @@
     <div>
         @if (ViewBag.IsInCart)
         {
-            <a asp-controller="Cart" asp-action="Remove" asp-route-productId="@Model.Id" class="btn btn-secondary my-3">Remove from Cart</a>
+            <a asp-controller="Cart" asp-action="Remove" asp-route-productId="@Model.Id" class="btn btn-secondary my-3">
+                <i class="bi bi-bag-x"></i> Remove from Cart
+            </a>
         }
         else
         {
-            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-primary my-3">Buy</a>
+            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-primary my-3">
+                <i class="bi bi-bag-plus"></i> Buy
+            </a>
         }
         </div>
     <div>
